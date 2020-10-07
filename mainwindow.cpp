@@ -35,10 +35,9 @@ public:
   static void addStudents(QString name, int age)
   {
     QString mas[30] = {
-      "Anatoliy", "Katya",     "Masha",   "Eva",      "Zema",   "Slavik",  "Margo",     "Yri",
-      "Vladimir", "Evilina",   "Alesha",  "Vasiliy",  "Dima",   "Ruslan",  "Oleg",      "Mikhail",
-      "Igor",     "Ivan",      "Gleb",    "Denis",    "Alina",  "Alisa",   "Anastasia", "Viktoria",
-      "Darya",    "Ekaterina", "Kamila", "Kristina", "Ksenia", "Natalya",
+      "Anatoliy", "Katya",   "Masha",     "Eva",      "Zema",  "Slavik",    "Margo",  "Yri",      "Vladimir", "Evilina",
+      "Alesha",   "Vasiliy", "Dima",      "Ruslan",   "Oleg",  "Mikhail",   "Igor",   "Ivan",     "Gleb",     "Denis",
+      "Alina",    "Alisa",   "Anastasia", "Viktoria", "Darya", "Ekaterina", "Kamila", "Kristina", "Ksenia",   "Natalya",
     };
     User student(name, age);
     name = mas[rand() % 30];
