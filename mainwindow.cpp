@@ -4,19 +4,17 @@
 #include <string>
 #include <ctime>
 
-class User
-{
+class User {
     int age_;
     QString name_;
+
 public:
     explicit User(QString name, int age = 18)
     {
-        if (age >= 18)
-        {
+        if (age >= 18) {
             this->age_ = age;
         }
-        else
-        {
+        else {
             this->age_ = 18;
         }
         this->name_ = name;
@@ -32,8 +30,7 @@ public:
     }
     static bool removeUser(unsigned long index)
     {
-        if (index < getTotalCount())
-        {
+        if (index < getTotalCount()) {
             users.erase(users.begin() + index);
             return true;
         }
@@ -42,10 +39,8 @@ public:
     static unsigned long removeUser(QString name)
     {
         int erased = 0;
-        for (auto i = users.begin(); i < users.end(); i++)
-        {
-            if (i->name_ == name)
-            {
+        for (auto i = users.begin(); i < users.end(); i++) {
+            if (i->name_ == name) {
                 users.erase(i);
                 erased++;
             }
@@ -56,6 +51,7 @@ public:
     {
         return users.size();
     }
+
 private:
     QString getName()
     {
@@ -75,8 +71,7 @@ std::string randString()
     std::string tmp = "";
     static const char a[] = "abcdefghijklmnopqrstuvwxyz";
     int l = rand() % 25 + 1;
-    for (int i = 0; i < l; ++i)
-    {
+    for (int i = 0; i < l; ++i) {
         tmp += a[rand() % (sizeof(a) - 1)];
     }
     return tmp;
@@ -84,13 +79,13 @@ std::string randString()
 
 void MainWindow::on_addButton_clicked()
 {
-    User::addUser(QString::fromStdString(randString()), rand() % 63 + 18);\
+    User::addUser(QString::fromStdString(randString()), rand() % 63 + 18);
+\
 }
 
 void onDeleteClick()
 {
-    if (User::getTotalCount() > 0)
-    {
+    if (User::getTotalCount() > 0) {
         User::removeUser(rand() % User::getTotalCount());
     }
 }
@@ -98,14 +93,15 @@ void onDeleteClick()
 void onDeleteAllClick()
 {
     unsigned long i = User::getTotalCount();
-    while (i > 0)
-    {
+    while (i > 0) {
         i--;
         User::removeUser(i);
     }
 }
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget* parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
 {
     srand(time(NULL));
     ui->setupUi(this);
