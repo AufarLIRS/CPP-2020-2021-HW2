@@ -70,7 +70,7 @@ public:
   {
     if (getTotalCount() == 0)
     {
-      qDebug() << "The list is empty";
+      qDebug() << "The list is empty!";
     }
     qDebug() << "-----------------------------------------------";
     for (size_t i = 0; i < users_.size(); i++)
