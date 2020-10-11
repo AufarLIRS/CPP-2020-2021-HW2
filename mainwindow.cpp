@@ -67,7 +67,7 @@ int randrange(int randMin,int randMax)
 void Delete_all_users()
 {
   User::users_.clear();
-   qDebug() << "Все студенты удалены" <<  endl;
+   qDebug() << "Все студенты удалены " <<  endl;
 }
 
 void Delete_random_user()
