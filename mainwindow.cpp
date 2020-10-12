@@ -7,7 +7,7 @@ class User
 {
   int age;       // private
   QString name;  // private
-  static int total_count;
+  // static int total_count;
 
 public:
   explicit User(QString name, int age = 18)
@@ -21,7 +21,6 @@ public:
       this->age = 18;
     }
     this->name = name;
-    total_count++;
   }
   QString getName()
   {
@@ -33,7 +32,7 @@ public:
   }
   static int getTotalCount()
   {
-    return total_count;
+    return users_.size();
   }
   static std::vector<User> users_;
 
@@ -47,7 +46,6 @@ public:
     if (k <= users_.size())
     {
       users_.erase(users_.begin() + k - 1);
-      total_count -= 1;
     }
   }
 
@@ -58,22 +56,12 @@ public:
       if (users_[i].getName() == name)
       {
         users_.erase(users_.begin() + i);
-        total_count -= 1;
         break;
       }
     }
   }
-  int GetCount()
-  {
-    return users_.size();
-  }
-  void CountNull()
-  {
-    total_count = 0;
-  };
 };
 
-int User::total_count = 0;
 std::vector<User> User::users_;
 QString RandomName()
 {
@@ -102,14 +90,13 @@ void MainWindow::on_pushButton_clicked()
 
 void ClearUsers()
 {
-  User::users_[0].CountNull();
   User::users_.clear();
 }
 void DeleteRandom()
 {
   if (!User::users_.empty())
   {
-    if (User::users_[0].GetCount() != 1)
+    if (User::users_.size() != 1)
     {
       User::users_[0].DeleteByIndex(RandomNum(0, User::users_.size()));
     }

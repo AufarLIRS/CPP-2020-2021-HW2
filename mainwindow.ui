@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>40</y>
-      <width>91</width>
-      <height>64</height>
+      <y>58</y>
+      <width>89</width>
+      <height>28</height>
      </rect>
     </property>
     <property name="text">
@@ -30,8 +30,8 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>187</x>
-      <y>41</y>
+      <x>200</x>
+      <y>30</y>
       <width>89</width>
       <height>28</height>
      </rect>
@@ -43,8 +43,8 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>187</x>
-      <y>75</y>
+      <x>200</x>
+      <y>86</y>
       <width>89</width>
       <height>28</height>
      </rect>
