@@ -25,7 +25,6 @@ public:
       this->age = 18;
     }
     this->name = name;
-    total_count++;
   }
   QString getName()
   {
@@ -34,10 +33,6 @@ public:
   int getAge()
   {
     return age;
-  }
-  static int getTotalCount()
-  {
-    return total_count;
   }
   static void ListOfUsers(User new_user)
   {
