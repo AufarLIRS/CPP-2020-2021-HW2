@@ -99,12 +99,7 @@ void onDeleteClick()
 
 void onDeleteAllClick()
 {
-  unsigned long i = User::getTotalCount();
-  while (i > 0)
-  {
-    i--;
-    User::removeUser(i);
-  }
+  User::users.clear();
   // qDebug() << User::getTotalCount();
 }
 
