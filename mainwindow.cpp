@@ -8,6 +8,7 @@
 #include <string>
 class User
 {
+  static std::vector<User> users_;
   int age;       // private
   QString name;  // private
   static int total_count;
@@ -38,61 +39,71 @@ public:
   {
     return total_count;
   }
-  static std::vector<User> users_;
+  static void ListOfUsers(User new_user)
+  {
+    User::users_.push_back(new_user);
+  }
+
+  static void DeleteUserById(size_t id)
+  {
+    QString user;
+    if (id < 0 || id >= users_.size())
+    {
+      qDebug() << "все пользователи удалены";
+      return;
+    }
+    if (users_.size() == 0)
+    {
+      qDebug() << "все пользователи удалены";
+      return;
+    }
+    else
+    {
+      user = users_[id].getName();
+      users_.erase(users_.begin() + id);
+    }
+    qDebug() << "пользователь" << user << "удален!" << endl;
+  }
+
+  static void DeleteUserByName(QString name)
+  {
+    for (unsigned int i = 0; i < users_.size(); i++)
+    {
+      if (users_[i].getName() == name)
+        users_.erase(users_.begin() + i);
+    }
+  }
+  static void SetUserClear()
+  {
+    users_.clear();
+  }
+  static void AddUser(User new_user)
+  {
+    users_.push_back(new_user);
+  }
+  static size_t GetUserSize()
+  {
+    return users_.size();
+  }
 };
 int User::total_count = 0;
 std::vector<User> User::users_;
 
-static void ListOfUsers(User new_user)
-{
-  User::users_.push_back(new_user);
-}
-static void DeleteUserById(size_t id)
-{
-  QString user;
-  if (id < 0 || id >= User::users_.size())
-  {
-    qDebug() << "все пользователи удалены";
-    return;
-  }
-  if (User::users_.size() == 0)
-  {
-    qDebug() << "все пользователи удалены";
-    return;
-  }
-  else
-  {
-    user = User::users_[id].getName();
-    User::users_.erase(User::users_.begin() + id);
-  }
-  qDebug() << "пользователь" << user << "удален!" << endl;
-}
-static size_t GetUserSize()
-{
-  return User::users_.size();
-}
-static void DeleteUserByName(QString name)
-{
-  for (unsigned int i = 0; i < User::users_.size(); i++)
-  {
-    if (User::users_[i].getName() == name)
-      User::users_.erase(User::users_.begin() + i);
-  }
-}
 int getRandomNumber(int min, int max)
 {
   static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);
   // Равномерно распределяем рандомное число в нашем диапазоне
   return static_cast<int>(rand() * fraction * (max - min + 1) + min);
 }
+
 void DeleteOnClick()
 {
-  qint64 val = getRandomNumber(0, User::users_.size() - 1);
-  DeleteUserById(val);
+  qint64 val = getRandomNumber(0, User::GetUserSize() - 1);
+  User::DeleteUserById(val);
 }
 void DeletAllOnClick()
 {
-  User::users_.clear();
+  User::SetUserClear();
   qDebug() << "все пользователи удалены";
 }
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -125,10 +136,10 @@ void MainWindow::on_submitPushButton_clicked()
   // User::users_.push_back(student);
   // qDebug() << "Last student age:" << User::users_.end()->getAge();
   // qDebug() << "Last student name:" << User::users_.end()->getName();
-  qDebug() << "Total count:" << User::users_.size();
-  qDebug() << "First student name ([0]):" << User::users_[0].getName();
-  qDebug() << "First student name (at):" << User::users_.at(0).getName();
-  qDebug() << "------------------------";
+  //  qDebug() << "Total count:" << User::getTotalCount();
+  //  qDebug() << "First student name ([0]):" << User::users_[0].getName();
+  //  qDebug() << "First student name (at):" << User::users_.at(0).getName();
+  //  qDebug() << "------------------------";
 }
 
 void MainWindow::on_add_button_clicked()
@@ -139,6 +150,6 @@ void MainWindow::on_add_button_clicked()
                         "Ilshat", "Anonim", "Winston", "Camel",  "Malboro",  "Maxim" };
   QString name = names[getRandomNumber(0, 20)];
   User new_user(name, randAge);
-  User::users_.push_back(new_user);
+  User::AddUser(new_user);
   qDebug() << "add new user " << name << randAge << endl;
 }
