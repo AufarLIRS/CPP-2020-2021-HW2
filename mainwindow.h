@@ -25,9 +25,6 @@ private slots:
 
   void on_deleteAllButton_clicked();
 
-signals:
-  void mySignal1();
-
 private:
   Ui::MainWindow* ui;
 };
