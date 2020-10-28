@@ -22,9 +22,10 @@ const char* names[10] = { "Sasha", "Pasha", "Dasha", "Kolya", "Olya", "Yura", "S
 
 class User
 {
-  int age;       // private
-  QString name;  // private
-  static int total_count;
+  int age;                          // private
+  QString name;                     // private
+  static int total_count;           // private
+  static std::vector<User> users_;  // private
 
 public:
   explicit User(QString name, int age = 18)
@@ -48,9 +49,17 @@ public:
   {
     return name;
   }
+  static QString getNameOfIndex(int index)
+  {
+    return users_[index].getName();
+  }
   int getAge()
   {
     return age;
+  }
+  static void deleteAllStudents()
+  {
+    users_.clear();
   }
   static int getTotalCount()
   {
@@ -70,7 +79,10 @@ public:
     for (unsigned long long i = 0; i < users_.size(); i++)
     {
       if (users_[i].getName() == name)
+      {
         users_.erase(users_.begin() + i);
+        break;
+      }
     }
     total_count--;
   }
@@ -78,7 +90,6 @@ public:
   {
     return (users_.size());
   }
-  static std::vector<User> users_;
 };
 
 int User::total_count = 0;
@@ -89,8 +100,8 @@ void reactOnDeleteButtonClick()
   if (User::getTotalCount() != 0)
   {
     int randindex = rand() % (User::getTotalCount());
+    qDebug() << "Bye, " << User::getNameOfIndex(randindex);
     User::deleteUserOfIndex(randindex);
-    qDebug() << User::users_[randindex].getName() << " gone";
   }
   else
     qDebug() << "All already gone, try to add new user";
@@ -100,8 +111,7 @@ void reactOnDeleteAllButtonClick()
 {
   if (User::getTotalCount() != 0)
   {
-    while (User::getTotalCount() != 0)
-      User::deleteUserOfIndex(0);
+    User::deleteAllStudents();
     qDebug() << "All students gone :(";
   }
   else
