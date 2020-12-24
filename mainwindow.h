@@ -17,5 +17,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+private slots:
+    void on_pushButton_clicked();
+    void deleteUser();
+    void deleteAllOfUsers();
 };
 #endif // MAINWINDOW_H
