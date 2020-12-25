@@ -17,7 +17,8 @@ public:
 
 private slots:
     void on_addButton_clicked();
-
+    void deleteUser();
+    void deleteAllUser();
 private:
     Ui::MainWindow *ui;
 };
